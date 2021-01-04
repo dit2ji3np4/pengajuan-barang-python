@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+</style> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='bjb_logo.svg' rel='shortcut icon'>
+  <title>Pdf Page</title>
+</head>
+<body>
+<br>
+
+<table class="table pdf-atas" border="1" >
+
+    <tr>
+        <th scope="col" rowspan="5"><img src="gambar\bjb_logo.png" alt="my image"></th>
+        <th scope="col" style="margin: 5%; padding: 12%;"><h4><br> Planning and Governance <br>Divisi Teknologi Informasi</h4></th>
+        <th scope="col" rowspan="5">NSR</th>
+    </tr>
+
+    <tr>
+        <th scope="col"></th>
+    </tr>
+    
+    <tr>
+        <th scope="col"></th>
+    </tr>
+
+    <tr>
+        <th scope="col"></th>
+    </tr>
+
+    <tr>
+        <th scope="col"><br>Serah Terima Inventaris Kantor</th>
+    </tr>
+
+</table>
+
+<br>
+<center><h1>BERITA ACARA <br> SERAH TERIMA INVENTARIS KANTOR</h1></center>
+
+<table class="table" border="1">
+    
+    <tr>
+        <th>Nama / NIK</th>
+        <td><center><br>{{ terima.nama_pemilik }}<br></center></td>
+        <th>Jabatan</th>
+        <td><center><br>{{ terima.jabatan }}<br></center></td>
+      </tr>
+      <tr>
+        <th>Divisi</th>
+        <td><center><br>{{ terima.divisi }}<br></center></td>
+        <th>Bagian/Grup</th>
+        <td><center><br>{{ terima.pengajuans.group_id }}<br></center></td>
+      </tr>
+      <tr>
+        <th>Nama Inventaris Kantor</th>
+        <td><center><br>{{ terima.pengajuans.nama_barang }}<br></center></td>
+        <th>Serial Number</th>
+
+          {% if terima.id >= 10 %}
+          <td><center><br>0{{ terima.id }}<br></center></td>
+          {% elif terima.id >= 100 %}
+          <td><center><br>{{ terima.id }}<br></center></td>
+          {% else %}
+          <td><center><br>00{{ terima.id }}<br></center></td>
+          {% endif %} 
+
+      </tr>
+      <tr>
+        <th>Merk Inventaris Kantor</th>
+        <td><center><br>{{ terima.merk }}<br></center></td>
+        <th>Type Inventaris Kantor</th>
+        <td><center><br>{{ terima.tipe }}<br></center></td>
+      </tr>
+      <tr>
+        <th colspan="2">Tanggal Terima Inventaris Kantor</th>
+        <th colspan="2"><br>{{ terima.tanggal_terima }}<br></th>
+      </tr>
+      
+</table>
+
+<br>
+
+<h2>Dengan ini menyatakan :</h2>
+<p>1. Akan menjaga dan memelihara inventaris kantor yang dipinjamkan, segala kerusakan yang
+   diakibatkan oleh kelalaian pengguna menjadi tanggungjawab pengguna.<br>
+   2. Akan menggunakan sebaik mungkin untuk kepentingan perusahaan dan bertanggung jawab
+   sepenuhnya jika terdapat penggunaan yang bukan untuk kepentingan perusahaan dan hal tersebut
+   bukan tanggung jawab <b>Bank bjb</b><br>
+   3. Akan mengembalikan apabila perusahaan meminta atau dipindahkan dari Divisi TI <br>
+   4. Tidak akan mengurangi spesifikasi inventaris kantor yang dipinjamkan
+
+</p>
+
+<br>
+
+<table border="1">
+  <tr>
+    <td><center><br> User yg Menerima
+        <br><br><br><br><br><br>
+        ({{ terima.nama_pemilik }})</center>
+        Tanggal : <br>
+    </td>
+    <td><center><br> Pemimpin User yg Menerima
+        <br><br><br><br><br><br>
+        ({{ terima.pemimpin_user }})</center>
+        Tanggal : <br>
+    </td>
+  </tr>
+  <tr>
+    <td><center><br> User yg Menyerahkan
+        <br><br><br><br><br><br>
+        ({{ terima.nama_penyerah }})</center>
+        Tanggal : <br>
+    </td>
+    <td><center><br> Pemimpin Grup Plannning & Governance
+        <br><br><br><br><br><br>
+        ({{ terima.pemimpin_pgo }})</center>
+        Tanggal : <br> 
+    </td>
+  </tr>
+  
+</table>
+<br><br><br><br><br><br>
+<table border="1"><tr><td></td></tr></table>
+<p>{{ terima.id }} | &copy; Copyright Information Technology Division, PT.Bank bjb 2017
+<br>Bank Pembangunan Daerah Jawa Barat dan Banten, Tbk
+</p>
+
+</body>
+</html>

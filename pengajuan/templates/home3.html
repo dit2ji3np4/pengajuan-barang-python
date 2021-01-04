@@ -1,0 +1,40 @@
+{% extends 'base3.html' %}
+
+
+{% block content %}
+
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+
+  <!--Pengelolaan Fasilitas Kantor Bank BJB-->
+
+  <div class="row justify-content-center" style="margin-top: 15vh; color: #2b2a2a;">
+    
+    <div class="col-md-8" style="margin-top: 8vh;">
+      <h2 style="text-align: center; font-family: unset;">Sistem Pengelolaan Fasilitas Divisi IT</h2>
+      <h5 style="text-align: center; font-family: unset; color: #1950b6;">Application Management Core & Non Core</h5>
+    </div>
+    
+  </div>
+
+  <!--Akhir Katanya-->
+
+  <div class="container" style="margin-top: 13vh; margin-bottom: 15%;">
+    <div class="row menu-hover" style="text-align: center; justify-content: center;">
+
+    
+      <a href="{% url 'pengajuan3' %}" class="col-md-3 jumbotron custom-menu" style="text-decoration: none; color: grey; margin: 2vh; height: -2vh; ">
+          <img src="/static/images/pengajuan.png" alt="" style="width: 10vh; height: 10vh; margin-right: 3vh; margin-left: -2vh;"> 
+          <b>Pengajuan Barang</b>
+      </a>  
+      <a href="{% url 'laporan3' %}" class="col-md-3 jumbotron custom-menu" style="text-decoration: none; color: grey; margin: 2vh; ">
+        <img src="/static/images/laporan.png" alt="" style="width: 10vh; height: 10vh; margin-right: 3vh; margin-left: -2vh;">
+          <b>Laporan Pengajuan</b>
+      </a>
+      
+    </div>
+  </div>
+
+</div>
+
+  {% endblock %}

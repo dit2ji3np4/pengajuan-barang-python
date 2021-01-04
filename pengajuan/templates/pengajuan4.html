@@ -1,0 +1,88 @@
+{% extends 'base4.html' %}
+
+
+{% block content %}
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+
+    <!--Fitur Tambah Pengajuan-->
+  <div class="row" style="margin-top: 10%;">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <h4 style="color: #204d95; font-weight: bold; margin-bottom: 3vh; margin-top: 5vh; ">Pengajuan Barang Network, Security & Risk Management</h4>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <a class="btn btn-success" href="{% url 'tambah_pengajuan_4' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; ">+ Tambah Pengajuan</a>
+    </div>
+    <div class="col-md-1"></div>
+
+  </div>
+
+
+    <!--Tables-->
+
+  <div class="row custom-table">
+
+    <!--div kosong bagian kiri table-->
+    <div class="col-md-1"></div>
+    <!--akhir div kosong-->
+
+    <div class="col-md-10 fa4-align-center table-responsive-sm">
+    <table class="table table-striped table-white table-bordered" >
+      <thead class="" style="background-color: #204d95; color: whitesmoke; ">
+        <tr>
+          <!-- <th scope="col">NIK</th> -->
+          <th scope="col" style="width: 15%;">NIK</th>
+          <th scope="col" style="width: 15%;">Group</th>
+          <th scope="col" style="width: 16%;">Nama Barang</th>
+          <th scope="col">Spesifikasi</th>
+          <th scope="col">Jumlah</th>
+          <th scope="col" style="width: 30%;">Landasan Kebutuhan Barang</th>
+          <th scope="col">Gambar</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pengajuan4  in permintaan24 %}
+        <tr>
+          <!-- <th scope="row">13895723</th> -->
+          <td scope="row">{{ pengajuan4.nik }}</td>
+          <td>{{ pengajuan4.group_id}}</td>
+          <td>{{ pengajuan4.nama_barang }}</td>
+          <td>{{ pengajuan4.spesifikasi }}</td>
+          <td>{{ pengajuan4.jumlah }}</td>
+          <td>{{ pengajuan4.landasan_kebutuhan }}</td>
+          <td>{% if pengajuan4.gambar %}
+            <img src="{{ pengajuan4.gambar.url }}" width=90px>
+            {% endif %}</td>
+
+            {% if pengajuan4.status == 0 %}
+            <td>
+            <a class="btn btn-danger" href="{% url 'edithapus4' pengajuan4.id %}"  role="button" style="color: white ; margin: 1vh;">Edit/Hapus</a>
+          </td>
+            {% elif pengajuan4.status == 1 %}
+            <td>Approve 1</td>
+            {% elif pengajuan4.status == 2 %}
+            <td>Dalam Proses</td>
+            {% elif pengajuan4.status == 3 %}
+            <td>Approve 2</td>
+            {% else %}
+            <td>Disapproved</td>
+            {% endif %}
+
+        </tr>
+        {% endfor %}          
+      </tbody>
+    </table>
+  </div>
+
+  <!--div kosong bagian kanan table-->
+  <div class="col-md-1"></div>
+  <!--akhir div kosong-->
+
+</div>
+<!--Akhir Table-->
+</div>   
+
+{% endblock %}

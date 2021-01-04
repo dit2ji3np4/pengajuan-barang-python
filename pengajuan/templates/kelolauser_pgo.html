@@ -1,0 +1,105 @@
+{% extends 'base_superadmin.html' %}
+
+{% block content %}
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+
+    <!--Fitur Tambah Pengajuan-->
+  <div class="row" style="margin-top: 10%;" >
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <h4 style="color: #204d95; font-weight: bold; margin-bottom: 3vh; margin-top: 5vh; ">Kelola User</h4>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <a class="btn btn-success" href="{% url 'tambahuser' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; ">+ Tambah User</a>
+    </div>
+    <div class="col-md-1"></div>
+
+  </div>
+
+
+    <!--Tables-->
+
+  <div class="row custom-table">
+
+    <!--div kosong bagian kiri table-->
+    <div class="col-md-1"></div>
+    <!--akhir div kosong-->
+
+    <div class="col-md-10 fa4-align-center table-responsive-sm">
+    <table class="table table-striped table-white table-bordered" >
+      <thead class="" style="background-color: #204d95; color: whitesmoke; ">
+        <tr>
+          <th scope="col">NIK/Username</th>
+          <th scope="col">Nama</th>
+          <th scope="col">Email</th>
+          <th scope="col">Group</th>
+          <th scope="col">Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for kelolauser  in user %}
+        <tr>
+          <th scope="row">{{ kelolauser.username }}</th>
+          <td>{{ kelolauser.first_name }}</td>
+          <td>{{ kelolauser.email }}</td>
+          <td>{{ kelolauser.groups.all.0.name }}</td>
+          <td>
+              <button data-toggle="modal" data-target="#delete-{{ kelolauser.id }}" class="btn btn-danger">Delete</button>
+          </td>
+
+          <!-- <div class="modal" id="delete-{{ kelolauser.id }}" role="dialog" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="modal-title">
+                    <h3>Delete</h3>
+                  </div>
+                  <div class="modal-body">
+                    Apakah anda yakin ingin menghapus <strong>{{ kelolauser.username | upper }}</strong> 
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{% url 'delete_user' kelolauser.id %}" class="btn btn-danger">Delete</a>
+                    <button class="btn btn-dark" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="modal" tabindex="-1" role="dialog" id="delete-{{ kelolauser.id }}">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Delete</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Apakah anda yakin ingin menghapus <strong>{{ kelolauser.username }}</strong></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a href="{% url 'delete_user' kelolauser.id %}" class="btn btn-danger">Delete</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </tr>
+        {% endfor %}          
+      </tbody>
+    </table>
+  </div>
+
+  <!--div kosong bagian kanan table-->
+  <div class="col-md-1"></div>
+  <!--akhir div kosong-->
+
+</div>
+<!--Akhir Table-->
+</div>
+
+{% endblock %}

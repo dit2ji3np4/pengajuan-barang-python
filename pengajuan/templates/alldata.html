@@ -1,0 +1,96 @@
+{% extends 'base_superadmin.html' %}
+
+
+{% block content %}
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+    <!--Fitur Tambah Pengajuan-->
+  <div class="row" style="margin-top: 10%;">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <h4 style="color: #204d95; font-weight: bold; margin-bottom: 3vh; margin-top: 5vh; ">Semua Data Pengajuan</h4>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <a class="btn btn-success" href="{% url 'tambah_pengajuan_superadmin' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; ">+ Tambah Pengajuan</a>
+    </div>
+    <div class="col-md-1"></div>
+
+  </div>
+
+
+    <!--Tables-->
+    {% for message in messages %}
+    {% if message %}
+        <center>
+        <div class="alert alert-success col-md-10" >{{ message }}</div>
+      </center>
+        {% endif %}
+      {% endfor %}
+  <div class="row custom-table">
+
+    <!--div kosong bagian kiri table-->
+    <div class="col-md-1"></div>
+    <!--akhir div kosong-->
+
+    <div class="col-md-10 fa4-align-center table-responsive">
+    <table class="table table-striped table-white table-bordered" >
+      <thead class="" style="background-color: #204d95; color: whitesmoke; ">
+        <tr>
+          <!-- <th scope="col">NIK</th> -->
+          <th scope="col" style="width: 15%;">Id Pengajuan</th>
+          <th scope="col" style="width: 15%;">NIK</th>
+          <th scope="col" style="width: 15%;">Group</th>
+          <th scope="col" style="width: 16%;">Nama Barang</th>
+          <th scope="col">Gambar</th>
+          <th scope="col">Nomor Memo</th>
+          <th scope="col" style="width: 15%;">Tanggal Memo</th>
+          <th scope="col">Status</th>
+          <th scope="col">Opsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for alldata  in data %}
+        <tr>
+          <!-- <th scope="row">13895723</th> -->
+          <td scope="row">{{ alldata.id }}</td>
+          <td scope="row">{{ alldata.nik }}</td>
+          <td>{{ alldata.group_id }}</td>
+          <td>{{ alldata.nama_barang }}</td>
+          <td>{% if alldata.gambar %}
+            <img src="{{ alldata.gambar.url }}" width=90px>
+            {% endif %}</td>
+          <td>{{ alldata.nomor_memo }}</td>
+          <td>{{ alldata.tanggal_memo }}</td>
+
+
+          {% if alldata.status == 0 %}
+          <td>None</td>
+          {% elif alldata.status == 1 %}
+          <td>Approve 1</td>
+          {% elif alldata.status == 2 %}
+          <td>Dalam Proses</td>
+          {% elif alldata.status == 3 %}
+          <td>Approve 2</td>
+          {% else %}
+          <td>Disapproved</td>
+          {% endif %}
+
+          <td>
+            <a class="btn btn-danger" href="{% url 'edit_hapus' alldata.id %}" role="button" style="color: light ;">Edit/Hapus</a>
+        </td>
+        </tr>
+        {% endfor %}          
+      </tbody>
+    </table>
+  </div>
+
+  <!--div kosong bagian kanan table-->
+  <div class="col-md-1"></div>
+  <!--akhir div kosong-->
+
+</div>
+<!--Akhir Table-->
+</div>   
+
+{% endblock %}

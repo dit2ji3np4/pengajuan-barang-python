@@ -1,0 +1,141 @@
+{% extends 'base_superadmin.html' %} {% block content %}
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+
+    <!--Bagian Container Kotaks-->
+
+    <div class="row" style="background-color: #e3e4e6; min-height: 92vh;">
+        <div class="col">
+            <div class="container">
+                <div class="row justify-content-center" style="margin-top: 100px; margin-bottom: 10vh;">
+                    <div class="col-lg-6">
+                        <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: #fff; margin-bottom: 10vh;">
+                            <div class="card-body pb-20">
+                                <div class="row justify-content-center" style="margin-top: 20px;">
+                                    <div class="col-lg">
+                                        <div class="text-center">
+                                            <h4>Tambah User</h4>
+                                            <div class="progress" style="margin-top: 3vh;">
+                                                <div class="progress-bar" style="width: 100%; background-color: rgb(238, 127, 0); "></div>
+                                            </div>
+                                        </div>
+
+                                        <!--Form-->
+                                        {% for message in messages %} {% if message %}
+                                        <div class="alert alert-success">{{ message }}</div>
+                                        {% endif %} {% endfor %}
+                                        <form class="needs-validation" action="{% url 'tambahuser' %}" method="post">
+                                            {% csrf_token %}
+                                            <br>
+
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.username }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.first_name }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.email }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.password1 }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.password2 }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+                                            <br>
+                                            <tr>
+                                                <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                                    <label for="disabledTextInput"></label>
+                                                </td>
+                                                <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                                    {{ form.group }}
+                                                    <small class="text-danger"></small>
+                                                </td>
+                                            </tr>
+
+                                            <div class="row mx-1" style="float:right; margin-top : 10%;">
+                                                <div class="col">
+                                                    <button class="btn btn-success">
+                                                        Simpan
+                                                    </button>
+                                                </div>
+                                                <div class="col">
+                                                    <a href="{% url 'kelolauser' %}" class="btn btn-secondary">
+                                                        Batal
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+                                        <!--Akhir Form-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Akhir Container Kotaks-->
+
+</div>
+<script>
+    /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+                                            //We start indexing at one because CSRF_token is considered and input field 
+                                            */
+
+    //Query All input fields
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Username / NIK';
+    form_fields[2].placeholder = 'Name';
+    form_fields[3].placeholder = 'Email';
+    form_fields[4].placeholder = 'Password';
+    form_fields[5].placeholder = 'Repeat Password';
+
+
+    for (var field in form_fields) {
+        form_fields[field].className += ' form-control'
+    }
+</script>
+
+{% endblock %}

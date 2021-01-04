@@ -1,0 +1,26 @@
+body{
+    background-color: #f0f0f0;
+}
+
+.custom-table{
+    margin-bottom: 15%;
+}
+
+.custom-menu{
+    background-color: white;
+    float: right;
+    
+}
+
+.custom-fitur-diatas-table{
+    background-color: aqua;
+}
+
+
+.custom-menu :hover{
+    color: black;
+}
+
+.pdf-atas {
+    text-decoration: none;
+}
