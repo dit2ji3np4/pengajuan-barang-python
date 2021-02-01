@@ -27,13 +27,13 @@
     <table class="table table-striped table-white table-bordered" >
       <thead class="" style="background-color: #204d95; color: whitesmoke; ">
         <tr>
+          <th scope="col">No</th>
           <th scope="col">No Memo Pengajuan</th>
           <th scope="col">Tanggal Memo Pengajuan</th>
           <th scope="col">Perihal Memo</th>
           <th scope="col">Harga Barang</th>
           <th scope="col">NIK</th>
           <th scope="col" style="width: 15%;">Group</th>
-          <th scope="col" style="width: 15%;">Id Pengajuan</th>
           <th scope="col" style="width: 16%;">Nama Barang</th>
           <th scope="col">Spesifikasi</th>
           <th scope="col">Jumlah</th>
@@ -45,13 +45,13 @@
       <tbody>
         {% for laporan3 in permintaan21 %}
         <tr>
+          <td>{{ laporan3.id }}</td>
           <td>{{ laporan3.nomor_memo }}</td>
           <td>{{ laporan3.tanggal_memo }}</td>
           <td>{{ laporan3.perihal_memo }}</td>
           <td>{{ laporan3.harga_barang }}</td>
           <td>{{ laporan3.nik }}</td>
           <td>{{ laporan3.group_id }}</td>
-          <td>{{ laporan3.id }}</td>
           <td>{{ laporan3.nama_barang }}</td>
           <td>{{ laporan3.spesifikasi }}</td>
           <td>{{ laporan3.jumlah }}</td>

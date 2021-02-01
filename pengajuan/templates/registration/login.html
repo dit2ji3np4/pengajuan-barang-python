@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style1.css' %}">
 </head>
+<style>
+    body{
+          background: url("/static/images/bgnotcolor2.png");
+          background-repeat: repeat;
+          background-size: 300px 300px;
+      }
+</style>
 <body class="bg-gradient-primary">
 
 {% if user.is_authenticated %}
@@ -31,8 +38,8 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4" style="color: cornflowerblue">Login Sistem Pengelolaan Fasilitas</h1>
-                                        <h2 class="h4" style="color: cornflowerblue; margin-top: -3vh; margin-bottom: 5vh;">Divisi IT</h2>
+                                        <h1 class="h4 text-gray-900 mb-4" style="color: cornflowerblue; text-shadow: 1px 1px 1px black;">Sistem Pengelolaan Fasilitas Divisi IT</h1>
+                                        <h2 class="h4" style="color: cornflowerblue; margin-top: -3vh; margin-bottom: 5vh; text-shadow: 1px 1px 1px black;">Login</h2>
                                     </div>
                                     <form class="user" method="post">
                                         {% csrf_token %}

@@ -29,9 +29,9 @@
       <thead class="" style="background-color: #204d95; color: whitesmoke; ">
         <tr>
           <!-- <th scope="col">NIK</th> -->
+          <th scope="col">No</th>
           <th scope="col" style="width: 15%;">NIK</th>
           <th scope="col" style="width: 15%;">Group</th>
-          <th scope="col" style="width: 15%;">Id Pengajuan</th>
           <th scope="col" style="width: 16%;">Nama Barang</th>
           <th scope="col">Spesifikasi</th>
           <th scope="col">Jumlah</th>
@@ -45,9 +45,9 @@
         {% for tindaklanjut  in permintaan2 %}
         <tr>
           <!-- <th scope="row">13895723</th> -->
+          <td scope="row">{{ tindaklanjut.id }}</td>
           <td scope="row">{{ tindaklanjut.nik }}</td>
           <td>{{ tindaklanjut.group_id }}</td>
-          <td scope="row">{{ tindaklanjut.id }}</td>
           <td>{{ tindaklanjut.nama_barang }}</td>
           <td>{{ tindaklanjut.spesifikasi }}</td>
           <td>{{ tindaklanjut.jumlah }}</td>

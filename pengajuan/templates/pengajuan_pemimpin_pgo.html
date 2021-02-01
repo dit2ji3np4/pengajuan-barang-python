@@ -2,6 +2,18 @@
 
 {% block content %}
 
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 2000);
+    function fade_out() {
+        $("#popup").fadeOut().empty();
+    }
+</script>
+
 <div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
 
     <!--Fitur Tambah Pengajuan-->
@@ -19,7 +31,13 @@
 
 
     <!--Tables-->
-
+    {% for message in messages %}
+    {% if message %}
+        <center>
+        <div class="alert alert-{{ message.tags }} col-md-10" id="popup" >{{ message }}</div>
+      </center>
+        {% endif %}
+      {% endfor %}
   <div class="row custom-table">
 
     <!--div kosong bagian kiri table-->
@@ -34,7 +52,7 @@
           <th scope="col" style="width: 15%;">NIK</th>
           <th scope="col" style="width: 15%;">Group</th>
           <th scope="col" style="width: 16%;">Nama Barang</th>
-          <th scope="col">Spesifikasi</th>
+          <th scope="col" style="width: 30%;">Spesifikasi</th>
           <th scope="col">Jumlah</th>
           <th scope="col" style="width: 30%;">Landasan Kebutuhan Barang</th>
           <th scope="col">Gambar</th>
@@ -78,7 +96,43 @@
             {% endif %}
         </td>
         </tr>
-        {% endfor %}          
+        {% endfor %}        
+        {% for pengajuan_gh_pgo  in permintaanex %}
+        <tr>
+          <!-- <th scope="row">13895723</th> -->
+          <td scope="row">{{ pengajuan_gh_pgo.nik }}</td>
+          <td>{{ pengajuan_gh_pgo.group_id}}</td>
+          <td>{{ pengajuan_gh_pgo.nama_barang }}</td>
+          <td>{{ pengajuan_gh_pgo.spesifikasi }}</td>
+          <td>{{ pengajuan_gh_pgo.jumlah }}</td>
+          <td>{{ pengajuan_gh_pgo.landasan_kebutuhan }}</td>
+          <td>{% if pengajuan_gh_pgo.gambar %}
+            <img src="{{ pengajuan_gh_pgo.gambar.url }}" width=90px>
+            {% endif %}</td>
+            {% if pengajuan_gh_pgo.status == 0 %}
+            <td>None</td>
+            {% elif pengajuan_gh_pgo.status == 1 %}
+            <td>Approve 1</td>
+            {% elif pengajuan_gh_pgo.status == 2 %}
+            <td>Dalam Proses</td>
+            {% elif pengajuan_gh_pgo.status == 3 %}
+            <td>Approve 2</td>
+            {% else %}
+            <td>Rejected</td>
+            {% endif %}
+          
+          <td>
+            {% if pengajuan_gh_pgo.status == 0 %}
+            <a class="btn btn-success" href="{% url 'approve_pgo' pengajuan_gh_pgo.id %}" role="button" style="color: white ; margin: 1vh;">Approve</a>
+            <a class="btn btn-danger" href="{% url 'disapprove_pgo' pengajuan_gh_pgo.id %}" role="button" style="color: white ; margin: 1vh;">Reject</a>
+            {% elif pengajuan_gh_pgo.status == 5 %}
+            <button class="btn btn-danger" disabled="disabled" role="button" style="color: white ;">Rejected</button>
+            {% else %}
+            <button class="btn btn-warning" disabled="disabled" role="button" style="color: white ;">Approved</button>
+            {% endif %}
+        </td>
+        </tr>
+        {% endfor %}   
       </tbody>
     </table>
   </div>
@@ -91,4 +145,5 @@
 <!--Akhir Table-->
 </div>   
 
+<!-- Modal -->
 {% endblock %}

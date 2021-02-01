@@ -9,13 +9,11 @@ body{
 .custom-menu{
     background-color: white;
     float: right;
-    
 }
 
 .custom-fitur-diatas-table{
     background-color: aqua;
 }
-
 
 .custom-menu :hover{
     color: black;

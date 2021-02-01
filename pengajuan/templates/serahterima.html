@@ -2,7 +2,6 @@
 
 
 {% block content %}
-
 <div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
 
     <!--Fitur Tambah Pengajuan-->
@@ -10,13 +9,14 @@
     <div class="col-md-1">
     </div>
     <div class="col-md-4">
-      <h4 style="color: #204d95; font-weight: bold; margin-bottom: 3vh; margin-top: 5vh; ">Serah Terima</h4>
+      <h4 style="color: #204d95; font-weight: bold;">Serah Terima</h4>
+      <!-- <a class="btn btn-success" href="{% url 'export_xls2' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; position: relative; ">Export Excel</a> -->
     </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-3">
-      <a class="btn btn-success" href="{% url 'tambah_terima' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; position: relative; ">+ Tambah Serah Terima</a>
+    <div class="col-md-5"></div>
+    <div class="col-md-2">
+      <!-- <a class="btn btn-primary" href="{% url 'tambah_terima' %}" role="button" style="margin-bottom: -19vh; margin-top: 5vh; position: relative; ">+ Tambah Serah Terima</a> -->
+      <a class="btn btn-success" href="{% url 'export_xls2' %}" role="button" style="margin-bottom: 3vh; margin-top: 5vh; position: relative; ">Export Excel</a>
     </div>
-    <div class="col-md-1"></div>
 
   </div>
 
@@ -33,13 +33,14 @@
       <thead class="" style="background-color: #204d95; color: whitesmoke; ">
         <tr>
           <!-- <th scope="col">NIK</th> -->
+          <th scope="col">Serial Number</th>
           <th scope="col" style="width: 15%;">Nomor Memo</th>
           <th scope="col" style="width: 15%;">Nama/NIK</th>
           <th scope="col" style="width: 16%;">Jabatan</th>
           <th scope="col">Divisi</th>
           <th scope="col">Group</th>
           <th scope="col" style="width: 30%;">Nama Inventaris Kantor</th>
-          <th scope="col">Serial Number</th>
+          <!-- <th scope="col">jumlah diambil</th> -->
           <th scope="col">Merk</th>
           <th scope="col">Type</th>
           <th scope="col">Tanggal Terima</th>
@@ -47,6 +48,7 @@
           <th scope="col">User yang Menyerahkan</th>
           <th scope="col">Pemimpin Group PGO</th>
           <th scope="col">Action</th>
+          <th scope="col">Print</th>
         </tr>
       </thead>
       <tbody>
@@ -70,6 +72,14 @@
         {% for terima in object_list %}
         <tr>
           
+          {% if terima.id >= 10 %}
+          <td>0{{ terima.id }}</td>
+          {% elif terima.id >= 100 %}
+          <td>{{ terima.id }}</td>
+          {% else %}
+          <td>00{{ terima.id }}</td>
+          {% endif %}
+        
           <td scope="row">{{ terima.pengajuans }}</td>
           <td>{{ terima.nama_pemilik }}</td>
           <td>{{ terima.jabatan }}</td>
@@ -78,14 +88,7 @@
           
           <td>{{ terima.pengajuans.group_id }}</td>
           <td>{{ terima.pengajuans.nama_barang }}</td>
-          
-          {% if terima.id >= 10 %}
-          <td>0{{ terima.id }}</td>
-          {% elif terima.id >= 100 %}
-          <td>{{ terima.id }}</td>
-          {% else %}
-          <td>00{{ terima.id }}</td>
-          {% endif %}          
+          <!-- <td>{{ terima.pengajuans.issue_quantity }}</td> -->          
 
           <td>{{ terima.merk }}</td>
           <td>{{ terima.tipe }}</td>
@@ -93,6 +96,7 @@
           <td>{{ terima.pemimpin_user }}</td>
           <td>{{ terima.nama_penyerah }}</td>
           <td>{{ terima.pemimpin_pgo }}</td>
+          <td><a class="btn btn-warning" href="{% url 'edit_hapus_terima' terima.id %}" role="button" style="color: white ; margin: 2vh; margin-top: 5vh">Edit/Hapus</a></td>
           <td><a class="btn btn-danger" href="{% url 'pdf_render_view' terima.pk %}" role="button" style="color: light ; margin-bottom: 1vh; margin-top: 3vh; position: sticky; ">Cetak PDF</a></td>
           
 

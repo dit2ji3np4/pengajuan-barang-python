@@ -8,7 +8,7 @@ def allowed_users(allowed_roles=[]):
             group = None
             if request.user.groups.exists():
                 group = request.user.groups.all()[0].name
-
+                
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
             else:
@@ -29,9 +29,6 @@ def pgo_only(view_func):
         #Sekum Divisi It (0)
         if group == 'Sekum Divisi IT':
             return redirect('home0')
-
-        if group == 'GH Sekum Divisi IT':
-            return redirect('home_gh_0')
 
         #Project Management (1)
         if group == 'Project Management':

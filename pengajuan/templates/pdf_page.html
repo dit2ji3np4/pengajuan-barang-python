@@ -16,7 +16,7 @@
     <tr>
         <th scope="col" rowspan="5"><img src="gambar\bjb_logo.png" alt="my image"></th>
         <th scope="col" style="margin: 5%; padding: 12%;"><h4><br> Planning and Governance <br>Divisi Teknologi Informasi</h4></th>
-        <th scope="col" rowspan="5">NSR</th>
+        <th scope="col" rowspan="5"></th>
     </tr>
 
     <tr>
@@ -41,23 +41,73 @@
 <center><h1>BERITA ACARA <br> SERAH TERIMA INVENTARIS KANTOR</h1></center>
 
 <table class="table" border="1">
-    
-    <tr>
-        <th>Nama / NIK</th>
+  <thead>
+      <tr>
+        <th><center><br>NAMA / NIK<br></center></th>
+        <th><center><br>JABATAN<br></center></th>
+        <th><center><br>DIVISI<br></center></th>
+        <th><center><br>BAGIAN/GRUP<br></center></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
         <td><center><br>{{ terima.nama_pemilik }}<br></center></td>
-        <th>Jabatan</th>
+        <td><center><br>{{ terima.jabatan }}<br></center></td>
+        <td><center><br>{{ terima.divisi }}<br></center></td>
+        <td><center><br>{{ terima.pengajuans.group_id }}<br></center></td>
+      </tr>
+  </tbody>
+</table>
+
+<table class="table" border="1">
+  <thead>
+      <tr>
+        <th><center><br>NAMA INVENTARIS KANTOR<br></center></th>
+        <th><center><br>SERIAL NUMBER<br></center></th>
+        <th><center><br>MERK INVENTARIS KANTOR<br></center></th>
+        <th><center><br>TYPE INVENTARIS KANTOR<br></center></th>
+        <th><center><br>TANGGAL TERIMA INVENTARIS KANTOR<br></center></th>
+      </tr>
+  </thead>
+  <br>
+  <tbody>
+      <tr>
+        <td><center><br>{{ terima.pengajuans.nama_barang }}<br></center></td>
+          {% if terima.id >= 10 %}
+          <td><center><br>0{{ terima.id }}<br></center></td>
+          {% elif terima.id >= 100 %}
+          <td><center><br>{{ terima.id }}<br></center></td>
+          {% else %}
+          <td><center><br>00{{ terima.id }}<br></center></td>
+          {% endif %} 
+        <td><center><br>{{ terima.merk }}<br></center></td>
+        <td><center><br>{{ terima.tipe }}<br></center></td>
+        <td><center><br>{{ terima.tanggal_terima }}<br></center></td>
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+
+    
+<!--     <tr>
+        <th>NAMA / NIK</th>
+        <td><center><br>{{ terima.nama_pemilik }}<br></center></td>
+        <th>JABATAN</th>
         <td><center><br>{{ terima.jabatan }}<br></center></td>
       </tr>
       <tr>
-        <th>Divisi</th>
+        <th>DIVISI</th>
         <td><center><br>{{ terima.divisi }}<br></center></td>
-        <th>Bagian/Grup</th>
+        <th>BAGIAN/GRUP</th>
         <td><center><br>{{ terima.pengajuans.group_id }}<br></center></td>
       </tr>
       <tr>
-        <th>Nama Inventaris Kantor</th>
+        <th>NAMA INVENTARIS KANTOR</th>
         <td><center><br>{{ terima.pengajuans.nama_barang }}<br></center></td>
-        <th>Serial Number</th>
+        <th>SERIAL NUMBER</th>
 
           {% if terima.id >= 10 %}
           <td><center><br>0{{ terima.id }}<br></center></td>
@@ -69,17 +119,17 @@
 
       </tr>
       <tr>
-        <th>Merk Inventaris Kantor</th>
+        <th>MERK INVENTARIS KANTOR</th>
         <td><center><br>{{ terima.merk }}<br></center></td>
-        <th>Type Inventaris Kantor</th>
+        <th>TYPE INVENTARIS KANTOR</th>
         <td><center><br>{{ terima.tipe }}<br></center></td>
       </tr>
       <tr>
-        <th colspan="2">Tanggal Terima Inventaris Kantor</th>
+        <th colspan="2">TANGGAL TERIMA INVENTARIS KANTOR</th>
         <th colspan="2"><br>{{ terima.tanggal_terima }}<br></th>
-      </tr>
+      </tr> -->
       
-</table>
+
 
 <br>
 
@@ -110,7 +160,7 @@
     </td>
   </tr>
   <tr>
-    <td><center><br> User yg Menyerahkan
+    <td><center><br> Group Planning & Governance
         <br><br><br><br><br><br>
         ({{ terima.nama_penyerah }})</center>
         Tanggal : <br>
@@ -125,7 +175,17 @@
 </table>
 <br><br><br><br><br><br>
 <table border="1"><tr><td></td></tr></table>
-<p>{{ terima.id }} | &copy; Copyright Information Technology Division, PT.Bank bjb 2017
+<p>
+
+          {% if terima.id >= 10 %}
+          0{{ terima.id }}
+          {% elif terima.id >= 100 %}
+          {{ terima.id }}
+          {% else %}
+          00{{ terima.id }}
+          {% endif %}
+
+ | &copy; Copyright Information Technology Division, PT.Bank bjb 2017
 <br>Bank Pembangunan Daerah Jawa Barat dan Banten, Tbk
 </p>
 

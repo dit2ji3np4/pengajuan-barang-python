@@ -31,9 +31,9 @@
     <table class="table table-striped table-white table-bordered" >
       <thead class="" style="background-color: #204d95; color: whitesmoke; ">
         <tr>
-          <th scope="col">NIK/Username</th>
-          <th scope="col">Nama</th>
-          <th scope="col">Email</th>
+          <th scope="col" style="width: 20%">NIK/Username</th>
+          <th scope="col" style="width: 20%" >Nama</th>
+          <th scope="col" style="width: 15%">Email</th>
           <th scope="col">Group</th>
           <th scope="col">Opsi</th>
         </tr>
@@ -45,10 +45,13 @@
           <td>{{ kelolauser.first_name }}</td>
           <td>{{ kelolauser.email }}</td>
           <td>{{ kelolauser.groups.all.0.name }}</td>
-          <td>
-              <button data-toggle="modal" data-target="#delete-{{ kelolauser.id }}" class="btn btn-danger">Delete</button>
-          </td>
-
+            {% if kelolauser.username == "superuser" %}
+            <td><button disabled="disabled"  class="btn btn-danger">Delete</button></td>
+            {% else %}
+            <td><button data-toggle="modal" data-target="#delete-{{ kelolauser.id }}" class="btn btn-danger">Delete</button></td>
+            {% endif %}
+              <!-- <a class="btn btn-primary" href="{% url 'edituser' kelolauser.id %}"  role="button" style="color: white ; margin: 1vh;">Edit</a> -->
+              
           <!-- <div class="modal" id="delete-{{ kelolauser.id }}" role="dialog" tabindex="-1">
             <div class="modal-dialog">
               <div class="modal-content">

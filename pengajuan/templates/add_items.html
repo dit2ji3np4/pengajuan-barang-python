@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
+
+    <!--Bagian Container Kotaks-->
+    
+    <div class="row" style="background-color: #e3e4e6; min-height: 92vh;">
+        <div class="col">
+            <div class="container">
+                <div class="row justify-content-center" style="margin-top: 50px;">
+                    <div class="col-lg-9">
+                        <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: #fff;">
+                            <div class="card-body pb-20">
+                                <div class="row justify-content-center" style="margin-top: 20px;">
+                                    <div class="col-lg">
+                                        <div class="text-center">
+                        <h4>Ambil & Tambah Barang</h4>
+                        <div class="progress" style="margin-top: 3vh;">
+                          <div class="progress-bar" style="width: 100%; background-color: green; "></div>
+                      </div>
+                      </div> 
+                      <form action='' class="needs-validation"  method='POST' enctype="multipart/form-data">
+                          
+                        {% csrf_token %}
+<!--                         <br>
+                        <tr>
+                            <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                <label for="disabledTextInput">Kurangi Jumlah</label>
+                            </td>
+                            <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                {{ form.issue_quantity }}
+                                <small class="text-danger"></small>
+                            </td>
+                        </tr>
+                        <br>
+                        <br>
+                        <tr>
+                            <td class="text-right" style="margin-left: 3px; width: 20%; padding-top:20px; padding-right: 20px">
+                                <label for="disabledTextInput">Kirim ke</label>
+                            </td>
+                            <td class="text-left" style="margin-left: 3px; width: 80%; padding-top:20px; padding-right: 20px">
+                                {{ form.issue_to }}
+                                <small class="text-danger"></small>
+                            </td>
+                        </tr>
+                        <br> -->
+                        <br>
+                        {{ form.as_p }}
+                        
+                        <div class="row mx-1" style="float:right; margin-top : 3%;">
+                            <div class="col">
+                                <button class="btn btn-success">
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+
+                        </form>
+                      
+                      <!--Akhir Form-->
+    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>
+
+{% endblock %}

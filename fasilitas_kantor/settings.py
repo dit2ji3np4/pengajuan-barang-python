@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import os.path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,18 +26,20 @@ SECRET_KEY = '66=!5e5nyyjjm51&&$@o_ca8ysz5#clbz@86*rt@j0y2d!hc@1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'fasilitas_kantor.apps.DjangoSuitConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_middleware_global_request',
     'pengajuan',
 ]
 
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_middleware_global_request.middleware.GlobalRequestMiddleware',    
 ]
 
 ROOT_URLCONF = 'fasilitas_kantor.urls'
@@ -127,7 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = ''
+
+STATICFILES_DIRS = (os.path.join('static'), )
 
 LOGIN_REDIRECT_URL = 'home'
 

@@ -2,6 +2,19 @@
 
 {% block content %}
 
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+<script text="javascript">
+    setTimeout(fade_out, 2000);
+    function fade_out() {
+        $("#popup").fadeOut().empty();
+    }
+</script>
+
 <div class="d-flex flex-column" style="min-height: 92vh; width: 100%;">
 
     <!--Fitur Tambah Pengajuan-->
@@ -19,7 +32,13 @@
 
 
     <!--Tables-->
-
+    {% for message in messages %}
+    {% if message %}
+        <center>
+        <div class="alert alert-{{ message.tags }} col-md-10" id="popup" >{{ message }}</div>
+      </center>
+        {% endif %}
+      {% endfor %}
   <div class="row custom-table">
 
     <!--div kosong bagian kiri table-->
@@ -34,7 +53,7 @@
           <th scope="col" style="width: 15%;">NIK</th>
           <th scope="col" style="width: 15%;">Group</th>
           <th scope="col" style="width: 16%;">Nama Barang</th>
-          <th scope="col">Spesifikasi</th>
+          <th scope="col" style="width: 30%;">Spesifikasi</th>
           <th scope="col">Jumlah</th>
           <th scope="col" style="width: 30%;">Landasan Kebutuhan Barang</th>
           <th scope="col">Gambar</th>
@@ -92,5 +111,6 @@
 </div>
 <!--Akhir Table-->
 </div>   
+
 
 {% endblock %}
