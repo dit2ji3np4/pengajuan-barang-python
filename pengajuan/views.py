@@ -92,6 +92,8 @@ class serahterima2(ListView):
     model = Terima 
     template_name = 'serahterima2.html'
 
+@login_required
+@allowed_users(allowed_roles=['Super Admin'])
 def tambah_terima2(request):
     if request.POST:
         form = FormTerima(request.POST, request.FILES)
@@ -227,9 +229,9 @@ def home(request):
     data2 = Pengajuan.objects.filter(status=3).exclude(jumlah2=0).count()
     return render(request,'home_pgo.html',{'data1' : data1, 'data2' : data2})
 
-#@login_required(login_url=settings.LOGIN_URL)
-#@pgo_only
-#@allowed_users(allowed_roles=['Planning and Governance'])
+@login_required(login_url=settings.LOGIN_URL)
+@pgo_only
+@allowed_users(allowed_roles=['Planning and Governance'])
 def allpengajuan(request):
     permintaan = Pengajuan.objects.filter(group_id='Planning and Governance')
     konteks = { 
@@ -260,9 +262,9 @@ def deletepgo(request, id_allpengajuan):
 
     return redirect('allpengajuan')
 
-#@login_required(login_url=settings.LOGIN_URL)
-#@pgo_only
-#@allowed_users(allowed_roles=['Planning and Governance'])
+@login_required(login_url=settings.LOGIN_URL)
+@pgo_only
+@allowed_users(allowed_roles=['Planning and Governance'])
 def form_tindaklanjut(request, id_tindaklanjut):
     tindaklanjut = Pengajuan.objects.get(id=id_tindaklanjut)
     template = 'form_tindaklanjut_pgo.html'
@@ -280,9 +282,9 @@ def form_tindaklanjut(request, id_tindaklanjut):
         }
     return render(request, template, konteks)
 
-#@login_required(login_url=settings.LOGIN_URL)
-#@pgo_only
-#@allowed_users(allowed_roles=['Planning and Governance'])
+@login_required(login_url=settings.LOGIN_URL)
+@pgo_only
+@allowed_users(allowed_roles=['Planning and Governance'])
 def tindaklanjut(request):
     permintaan2 = Pengajuan.objects.filter(tl=1)
     konteks = {
@@ -291,9 +293,9 @@ def tindaklanjut(request):
     return render(request,'tindaklanjut_pgo.html',konteks)
 
 
-#@login_required(login_url=settings.LOGIN_URL)
-#@pgo_only
-#@allowed_users(allowed_roles=['Planning and Governance'])
+@login_required(login_url=settings.LOGIN_URL)
+@pgo_only
+@allowed_users(allowed_roles=['Planning and Governance'])
 def tambah_pengajuan(request):
     if request.POST:
         form = FormPengajuan(request.POST, request.FILES)
@@ -336,9 +338,9 @@ def tambahketerangan(request, id_hasiltindaklanjut):
         }
     return render(request, template, konteks)
 
-#@login_required(login_url=settings.LOGIN_URL)
-#@pgo_only
-#@allowed_users(allowed_roles=['Planning and Governance'])
+@login_required(login_url=settings.LOGIN_URL)
+@pgo_only
+@allowed_users(allowed_roles=['Planning and Governance'])
 def hasiltindaklanjut(request):
     permintaan3 = Pengajuan.objects.filter(status=3)
     konteks = {
@@ -406,16 +408,16 @@ def tambah_terima(request):
         return render(request, 'tambah_terima.html',konteks)
 #Bagian Pemimpin PGO
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def home_gh_pgo(request):
     data6 = Pengajuan.objects.filter(group_id='Planning and Governance', status='0').count()
     dataex = Pengajuan.objects.filter(group_id='Sekum Divisi IT', status='0').count()
     data7 = Pengajuan.objects.filter(status='2').count()
     return render(request,'home_pemimpin_pgo.html',{'data6' : data6, 'data7' : data7, 'dataex' : dataex})
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def laporan_all(request):
     permintaan5 = Pengajuan.objects.filter(status=3)
     konteks = {
@@ -423,8 +425,8 @@ def laporan_all(request):
     }
     return render(request,'laporan_all.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def pengajuan_gh_pgo(request):
     permintaan6 = Pengajuan.objects.filter(group_id='Planning and Governance')
     permintaanex = Pengajuan.objects.filter(group_id='Sekum Divisi IT') 
@@ -434,8 +436,8 @@ def pengajuan_gh_pgo(request):
     }
     return render(request,'pengajuan_pemimpin_pgo.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def hasiltindaklanjut_gh_pgo(request):
     permintaan7 = Pengajuan.objects.filter(htl=1)
     konteks = {
@@ -443,8 +445,8 @@ def hasiltindaklanjut_gh_pgo(request):
     }
     return render(request,'hasiltindaklanjut_pemimpin_pgo.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def approve_pgo(request, id_pengajuan_gh_pgo):
     pengajuan_gh_pgo = Pengajuan.objects.get(id=id_pengajuan_gh_pgo)
     pengajuan_gh_pgo.status=1
@@ -454,8 +456,8 @@ def approve_pgo(request, id_pengajuan_gh_pgo):
 
     return redirect('pengajuan_gh_pgo')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def disapprove_pgo(request, id_pengajuan_gh_pgo):
     pengajuan_gh_pgo = Pengajuan.objects.get(id=id_pengajuan_gh_pgo)
     pengajuan_gh_pgo.status=5
@@ -465,8 +467,8 @@ def disapprove_pgo(request, id_pengajuan_gh_pgo):
 
     return redirect('pengajuan_gh_pgo')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def approve_pgo2(request, id_hasiltindaklanjut_gh_pgo):
     hasiltindaklanjut_gh_pgo = Pengajuan.objects.get(id=id_hasiltindaklanjut_gh_pgo)
     a = hasiltindaklanjut_gh_pgo.jumlah
@@ -477,8 +479,8 @@ def approve_pgo2(request, id_hasiltindaklanjut_gh_pgo):
 
     return redirect('hasiltindaklanjut_gh_pgo')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Planning and Governance'])
+@login_required
+@allowed_users(allowed_roles=['GH Planning and Governance'])
 def disapprove_pgo2(request, id_hasiltindaklanjut_gh_pgo):
     hasiltindaklanjut_gh_pgo = Pengajuan.objects.get(id=id_hasiltindaklanjut_gh_pgo)
     hasiltindaklanjut_gh_pgo.status=5
@@ -489,15 +491,15 @@ def disapprove_pgo2(request, id_hasiltindaklanjut_gh_pgo):
 
 # Pegawai Sekum Divisi IT (0)
 
-#@login_required
-#@allowed_users(allowed_roles=['Sekum Divisi IT'])
+@login_required
+@allowed_users(allowed_roles=['Sekum Divisi IT'])
 def home0(request):
     data4 = Pengajuan.objects.filter(group_id='Sekum Divisi IT').count()
     data5 = Pengajuan.objects.filter(group_id='Sekum Divisi IT', status='3').count()
     return render(request,'home0.html',{'data4' : data4, 'data5' : data5})
 
-#@login_required
-#@allowed_users(allowed_roles=['Sekum Divisi IT'])
+@login_required
+@allowed_users(allowed_roles=['Sekum Divisi IT'])
 def pengajuan0(request):
     permintaan8 = Pengajuan.objects.filter(group_id='Sekum Divisi IT')
     konteks = { 
@@ -528,8 +530,8 @@ def delete0(request, id_pengajuan0):
 
     return redirect('pengajuan0')
 
-#@login_required
-#@allowed_users(allowed_roles=['Sekum Divisi IT'])
+@login_required
+@allowed_users(allowed_roles=['Sekum Divisi IT'])
 def tambah_pengajuan_0(request):
     if request.POST:
         form = FormPengajuan(request.POST, request.FILES)
@@ -552,8 +554,8 @@ def tambah_pengajuan_0(request):
 
         return render(request, 'tambah_pengajuan_0.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['Sekum Divisi IT'])
+@login_required
+@allowed_users(allowed_roles=['Sekum Divisi IT'])
 def laporan0(request):
     permintaan9 = Pengajuan.objects.filter(status=3) & Pengajuan.objects.filter(group_id='Sekum Divisi IT')
     konteks = {
@@ -563,15 +565,15 @@ def laporan0(request):
 
 # Pegawai Project Management (1)
 
-#@login_required
-#@allowed_users(allowed_roles=['Project Management'])
+@login_required
+@allowed_users(allowed_roles=['Project Management'])
 def home1(request):
     data8 = Pengajuan.objects.filter(group_id='Project Management').count()
     data9 = Pengajuan.objects.filter(group_id='Project Management', status='3').count()
     return render(request,'home1.html',{'data8' : data8, 'data9' : data9})
 
-#@login_required
-#@allowed_users(allowed_roles=['Project Management'])
+@login_required
+@allowed_users(allowed_roles=['Project Management'])
 def pengajuan1(request):
     permintaan12 = Pengajuan.objects.filter(group_id='Project Management')
     konteks = { 
@@ -637,14 +639,14 @@ def laporan1(request):
 
 # Group Head Project Management (1)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Project Management'])
+@login_required
+@allowed_users(allowed_roles=['GH Project Management'])
 def home_gh_1(request):
     data21 = Pengajuan.objects.filter(group_id='Project Management', status=0).count()
     return render(request,'home_gh_1.html',{'data21' : data21})
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Project Management'])
+@login_required
+@allowed_users(allowed_roles=['GH Project Management'])
 def pengajuan_gh_1(request):
     permintaan14 = Pengajuan.objects.filter(group_id='Project Management')
     konteks = { 
@@ -661,8 +663,8 @@ def laporan_gh_1(request):
     }
     return render(request,'laporan_gh_1.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Project Management'])
+@login_required
+@allowed_users(allowed_roles=['GH Project Management'])
 def approve1(request, id_pengajuan_gh_1):
     pengajuan_gh_1 = Pengajuan.objects.get(id=id_pengajuan_gh_1)
     pengajuan_gh_1.tl=1
@@ -672,8 +674,8 @@ def approve1(request, id_pengajuan_gh_1):
 
     return redirect('pengajuan_gh_1')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Project Management'])
+@login_required
+@allowed_users(allowed_roles=['GH Project Management'])
 def disapprove1(request, id_pengajuan_gh_1):
     pengajuan_gh_1 = Pengajuan.objects.get(id=id_pengajuan_gh_1)
     pengajuan_gh_1.tl=0
@@ -685,15 +687,15 @@ def disapprove1(request, id_pengajuan_gh_1):
 
 # Pegawai Business Intelligence & Analythic (2)
 
-#@login_required
-#@allowed_users(allowed_roles=['Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['Business Intelligence & Analythic'])
 def home2(request):
     data10 = Pengajuan.objects.filter(group_id='Business Intelligence & Analythic').count()
     data11 = Pengajuan.objects.filter(group_id='Business Intelligence & Analythic', status='3').count()
     return render(request,'home2.html',{'data10' : data10, 'data11' : data11})
 
-#@login_required
-#@allowed_users(allowed_roles=['Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['Business Intelligence & Analythic'])
 def pengajuan2(request):
     permintaan16 = Pengajuan.objects.filter(group_id='Business Intelligence & Analythic')
     konteks = { 
@@ -759,14 +761,14 @@ def laporan2(request):
 
 # Group Head Business Intelligence & Analythic (2)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
 def home_gh_2(request):
     data22 = Pengajuan.objects.filter(group_id='Business Intelligence & Analythic', status=0).count()
     return render(request,'home_gh_2.html',{'data22' : data22})
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
 def pengajuan_gh_2(request):
     permintaan18 = Pengajuan.objects.filter(group_id='Business Intelligence & Analythic')
     konteks = { 
@@ -783,8 +785,8 @@ def laporan_gh_2(request):
     }
     return render(request,'laporan_gh_2.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
 def approve2(request, id_pengajuan_gh_2):
     pengajuan_gh_2 = Pengajuan.objects.get(id=id_pengajuan_gh_2)
     pengajuan_gh_2.tl=1
@@ -794,8 +796,8 @@ def approve2(request, id_pengajuan_gh_2):
 
     return redirect('pengajuan_gh_2')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
+@login_required
+@allowed_users(allowed_roles=['GH Business Intelligence & Analythic'])
 def disapprove2(request, id_pengajuan_gh_2):
     pengajuan_gh_2 = Pengajuan.objects.get(id=id_pengajuan_gh_2)
     pengajuan_gh_2.tl=0
@@ -808,15 +810,15 @@ def disapprove2(request, id_pengajuan_gh_2):
 
 # Pegawai Application Management Core & Non Core (3)
 
-#@login_required
-#@allowed_users(allowed_roles=['Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['Application Management Core & Non Core'])
 def home3(request):
     data12 = Pengajuan.objects.filter(group_id='Application Management Core & Non Core').count()
     data13 = Pengajuan.objects.filter(group_id='Application Management Core & Non Core', status='3').count()
     return render(request,'home3.html',{'data12' : data12, 'data13' : data13})
 
-#@login_required
-#@allowed_users(allowed_roles=['Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['Application Management Core & Non Core'])
 def pengajuan3(request):
     permintaan20 = Pengajuan.objects.filter(group_id='Application Management Core & Non Core')
     konteks = { 
@@ -882,14 +884,14 @@ def laporan3(request):
 
 # Group Head Application Management Core & Non Core (3)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
 def home_gh_3(request):
     data23 = Pengajuan.objects.filter(group_id='Application Management Core & Non Core', status=0).count()
     return render(request,'home_gh_3.html',{'data23' : data23})
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
 def pengajuan_gh_3(request):
     permintaan22 = Pengajuan.objects.filter(group_id='Application Management Core & Non Core')
     konteks = { 
@@ -906,8 +908,8 @@ def laporan_gh_3(request):
     }
     return render(request,'laporan_gh_3.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
 def approve3(request, id_pengajuan_gh_3):
     pengajuan_gh_3 = Pengajuan.objects.get(id=id_pengajuan_gh_3)
     pengajuan_gh_3.tl=1
@@ -917,8 +919,8 @@ def approve3(request, id_pengajuan_gh_3):
 
     return redirect('pengajuan_gh_3')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
+@login_required
+@allowed_users(allowed_roles=['GH Application Management Core & Non Core'])
 def disapprove3(request, id_pengajuan_gh_3):
     pengajuan_gh_3 = Pengajuan.objects.get(id=id_pengajuan_gh_3)
     pengajuan_gh_3.tl=0
@@ -931,15 +933,15 @@ def disapprove3(request, id_pengajuan_gh_3):
 
 # Pegawai Network, Security & Risk Management (4)
 
-#@login_required
-#@allowed_users(allowed_roles=['Network, Security & Risk Management'])
+@login_required
+@allowed_users(allowed_roles=['Network, Security & Risk Management'])
 def home4(request):
     data14 = Pengajuan.objects.filter(group_id='Network, Security & Risk Management').count()
     data15 = Pengajuan.objects.filter(group_id='Network, Security & Risk Management', status='3').count()
     return render(request,'home4.html',{'data14' : data14, 'data15' : data15})
 
-#@login_required
-#@allowed_users(allowed_roles=['Network, Security & Risk Management'])
+@login_required
+@allowed_users(allowed_roles=['Network, Security & Risk Management'])
 def pengajuan4(request):
     permintaan24 = Pengajuan.objects.filter(group_id='Network, Security & Risk Management')
     konteks = { 
@@ -1020,8 +1022,8 @@ def pengajuan_gh_4(request):
     }
     return render(request,'pengajuan_gh_4.html',konteks)
 
-@login_required
-@allowed_users(allowed_roles=['GH Network, Security & Risk Management'])
+#@login_required
+#@allowed_users(allowed_roles=['GH Network, Security & Risk Management'])
 def laporan_gh_4(request):
     permintaan27 = Pengajuan.objects.filter(status=3) & Pengajuan.objects.filter(group_id='Network, Security & Risk Management')
     konteks = {
@@ -1054,15 +1056,15 @@ def disapprove4(request, id_pengajuan_gh_4):
 
 # Pegawai Operation Management DC & DRC (5)
 
-#@login_required
-#@allowed_users(allowed_roles=['Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['Operation Management DC & DRC'])
 def home5(request):
     data16 = Pengajuan.objects.filter(group_id='Operation Management DC & DRC').count()
     data17 = Pengajuan.objects.filter(group_id='Operation Management DC & DRC', status='3').count()
     return render(request,'home5.html',{'data16' : data16, 'data17' : data17})
 
-#@login_required
-#@allowed_users(allowed_roles=['Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['Operation Management DC & DRC'])
 def pengajuan5(request):
     permintaan28 = Pengajuan.objects.filter(group_id='Operation Management DC & DRC')
     konteks = { 
@@ -1128,14 +1130,14 @@ def laporan5(request):
 
 # Group Head Operation Management DC & DRC (5)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['GH Operation Management DC & DRC'])
 def home_gh_5(request):
     data25 = Pengajuan.objects.filter(group_id='Operation Management DC & DRC', status=0).count()
     return render(request,'home_gh_5.html',{'data25' : data25})
 
-#@login_required
-#@allowed_users(allowed_roles=['Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['Operation Management DC & DRC'])
 def pengajuan_gh_5(request):
     permintaan30 = Pengajuan.objects.filter(group_id='Operation Management DC & DRC')
     konteks = { 
@@ -1152,8 +1154,8 @@ def laporan_gh_5(request):
     }
     return render(request,'laporan_gh_5.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['Operation Management DC & DRC'])
 def approve5(request, id_pengajuan_gh_5):
     pengajuan_gh_5 = Pengajuan.objects.get(id=id_pengajuan_gh_5)
     pengajuan_gh_5.tl=1
@@ -1163,8 +1165,8 @@ def approve5(request, id_pengajuan_gh_5):
 
     return redirect('pengajuan_gh_5')
 
-#@login_required
-#@allowed_users(allowed_roles=['Operation Management DC & DRC'])
+@login_required
+@allowed_users(allowed_roles=['Operation Management DC & DRC'])
 def disapprove5(request, id_pengajuan_gh_5):
     pengajuan_gh_5 = Pengajuan.objects.get(id=id_pengajuan_gh_5)
     pengajuan_gh_5.tl=0
@@ -1176,15 +1178,15 @@ def disapprove5(request, id_pengajuan_gh_5):
 
 # Pegawai Helpdesk & Support (6)
 
-#@login_required
-#@allowed_users(allowed_roles=['Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['Helpdesk & Support'])
 def home6(request):
     data18 = Pengajuan.objects.filter(group_id='Helpdesk & Support').count()
     data19 = Pengajuan.objects.filter(group_id='Helpdesk & Support', status='3').count()
     return render(request,'home6.html',{'data18' : data18, 'data19' : data19})
 
-#@login_required
-#@allowed_users(allowed_roles=['Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['Helpdesk & Support'])
 def pengajuan6(request):
     permintaan32 = Pengajuan.objects.filter(group_id='Helpdesk & Support')
     konteks = { 
@@ -1215,8 +1217,8 @@ def delete6(request, id_pengajuan6):
 
     return redirect('pengajuan6')
 
-#@login_required
-#@allowed_users(allowed_roles=['Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['Helpdesk & Support'])
 def tambah_pengajuan_6(request):
     if request.POST:
         form = FormPengajuan(request.POST, request.FILES)
@@ -1250,14 +1252,14 @@ def laporan6(request):
 
 # Group Head Helpdesk & Support (6)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['GH Helpdesk & Support'])
 def home_gh_6(request):
     data26 = Pengajuan.objects.filter(group_id='Helpdesk & Support', status=0).count()
     return render(request,'home_gh_6.html',{'data26' : data26})
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['GH Helpdesk & Support'])
 def pengajuan_gh_6(request):
     permintaan34 = Pengajuan.objects.filter(group_id='Helpdesk & Support')
     konteks = { 
@@ -1274,8 +1276,8 @@ def laporan_gh_6(request):
     }
     return render(request,'laporan_gh_6.html',konteks)
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['GH Helpdesk & Support'])
 def approve6(request, id_pengajuan_gh_6):
     pengajuan_gh_6 = Pengajuan.objects.get(id=id_pengajuan_gh_6)
     pengajuan_gh_6.tl=1
@@ -1285,8 +1287,8 @@ def approve6(request, id_pengajuan_gh_6):
 
     return redirect('pengajuan_gh_6')
 
-#@login_required
-#@allowed_users(allowed_roles=['GH Helpdesk & Support'])
+@login_required
+@allowed_users(allowed_roles=['GH Helpdesk & Support'])
 def disapprove6(request, id_pengajuan_gh_6):
     pengajuan_gh_6 = Pengajuan.objects.get(id=id_pengajuan_gh_6)
     pengajuan_gh_6.tl=1
